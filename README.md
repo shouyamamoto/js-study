@@ -8,6 +8,6 @@
 ということは、もし上に重い処理があったときには、次の処理が行われないということです。
 例えば、重い処理とは外部からファイルを取得する処理などです。
 
-![重い処理]("./images/Group 5.jpg")
+![重たい同期処理](https://github.com/shouyamamoto/js-study/blob/images/image01.jpg)
 
 ## 非同期処理とは
