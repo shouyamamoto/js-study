@@ -54,22 +54,22 @@ setTimeout(() => {
 
 - Promise を使った書き方
 
-```
+```javascript
 const promiseFactory = (num) => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      console.log(num)
-      resolve()
-    }, 1000)
-  })
-}
+      console.log(num);
+      resolve();
+    }, 1000);
+  });
+};
 
 promiseFactory(5)
   .then(() => promiseFactory(4))
   .then(() => promiseFactory(3))
   .then(() => promiseFactory(2))
   .then(() => promiseFactory(1))
-  .then(() => promiseFactory(0))
+  .then(() => promiseFactory(0));
 
 // 出力結果 => 5, 4, 3, 2, 1, 0
 ```
@@ -79,25 +79,25 @@ promiseFactory(5)
 
 - async await を使った書き方
 
-```
+```javascript
 const promiseFactory = (num) => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      console.log(num)
-      resolve()
-    }, 1000)
-  })
-}
+      console.log(num);
+      resolve();
+    }, 1000);
+  });
+};
 
 const putsNum = async () => {
-  await promiseFactory(5)
-  await promiseFactory(4)
-  await promiseFactory(3)
-  await promiseFactory(2)
-  await promiseFactory(1)
-  await promiseFactory(0)
-}
-putsNum()
+  await promiseFactory(5);
+  await promiseFactory(4);
+  await promiseFactory(3);
+  await promiseFactory(2);
+  await promiseFactory(1);
+  await promiseFactory(0);
+};
+putsNum();
 
 // 出力結果 => 5, 4, 3, 2, 1, 0
 ```
