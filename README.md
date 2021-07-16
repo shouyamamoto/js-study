@@ -15,6 +15,7 @@
 <br>
 
 ![重たい同期処理](https://github.com/shouyamamoto/js-study/blob/images/image01.jpg)
+<br>
 
 ## 非同期処理とは
 
