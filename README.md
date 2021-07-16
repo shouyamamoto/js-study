@@ -14,10 +14,8 @@
 例えば、重い処理とは外部から値を取得する処理などです。<br>
 <br>
 
-![重たい同期処理](https://github.com/shouyamamoto/js-study/blob/images/image01.jpg)
+![重たい同期処理](https://github.com/shouyamamoto/js-study/blob/images/image01.jpg)<br>
 <br>
-
-
 
 ## 非同期処理とは
 
@@ -26,8 +24,6 @@
 **コールバック関数**、**Promise**、**async, await**です。<br>
 
 まずは非同期処理の書き方のコードをみていきます。
-
-
 
 - コールバックを使った非同期処理の書き方
 
