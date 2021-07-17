@@ -119,3 +119,5 @@ Promise や async await を使うとネストが深くならず、可読性が�
 
 回復薬を作るためには、「薬草」と「アオキノコ」が必要で、「密林」にいく必要があります。<br>
 そして、今回のクエストを達成すると報酬として「回復薬」をもらうことができます。<br>
+
+![ハンター一人でクエストに挑む](https://github.com/shouyamamoto/js-study/blob/images/image03.jpg)<br>
