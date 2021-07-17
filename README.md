@@ -153,7 +153,20 @@ Promise や async await を使うとネストが深くならず、可読性が�
 
 ### コードとモンハンを混ぜて解説
 
-ここからは実際のコードと先ほどのモンハンの解説を混ぜて説明します。まずはコードから
+まずは基本的な Promise の書き方についてみていきましょう。
+
+```javascript
+new Promise((resolve, reject) => {
+  // 同期処理 ここでresolveかrejectを実行する
+})
+  .then() // resolveが実行されたら実行される処理を書く
+  .catch(); // rejectが実行されたら実行される処理を書く
+```
+
+まず、Promise を使うときには`new Promise`として、Promise から Promise のインスタンスを生成します。<br>
+続けて`.then()`や`.catch()`と書くことができます。これらは Promise の処理結果によって実行される処理が変わります。<br>
+<br>
+ここからは実際のコードと先ほどのモンハンの解説を混ぜて説明します。<br>
 
 ```javascript
 const restorativeItem = ["薬草", "アオキノコ"];
