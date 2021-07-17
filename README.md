@@ -192,10 +192,6 @@ getRestorativeItem(true)
   .catch(() => console.error("クエストに失敗しました。"));
 ```
 
-<br>
-このコードに絵を使って説明を加えます。<br>
-<br>
-
 ![プロミスを図解](https://github.com/shouyamamoto/js-study/blob/images/image07.jpg)<br>
 <br>
 先ほど、`.then()`や`.catch()`は Promise の処理結果によって実行される処理が変わるとお伝えしました。<br>
