@@ -145,6 +145,43 @@ Promise や async await を使うとネストが深くならず、可読性が�
 ハンターは準備やクエストに向かう必要がなくなったので、その時間で回復薬を調合する準備をすることができます。さらに空いた時間で釣りをすることもできました。<br><br>
 そしてプロミスはクエストを終え次第、ハンターに「クエストの結果」を知らせ、もしクエストを達成した場合には「薬草」と「アオキノコ」を渡します。<br>
 そして、プロミスからクエストの結果と素材を受け取ったハンターは、プロミスのいう通りに回復薬を調合します。<br>
-ハンターは調合の準備ができているので、すぐに回復薬を作り依頼者に納品します。こうしてハンターはうまく時間を使えるようになりました。
+ハンターは調合の準備ができているので、すぐに回復薬を作り依頼者に納品します。<br>
 
-![ハンターとプロミスでクエストに挑む](https://github.com/shouyamamoto/js-study/blob/images/image05.jpg)<br>
+![プロミスにクエストを頼む](https://github.com/shouyamamoto/js-study/blob/images/image05.jpg)<br>
+<br>
+こうしてハンターはうまく時間を使えるようになりました。<br>
+
+### コードとモンハンを混ぜて解説
+
+ここからは実際のコードと先ほどのモンハンの解説を混ぜて説明します。まずはコードから
+
+```javascript
+// 回復薬の素材
+const restorativeItem = ["薬草", "アオキノコ"];
+
+// 回復薬を作るために、プロミスがクエストにいく手順
+const getRestorativeItem = (questResult) => {
+  return new Promise((resolve, reject) => {
+    if (questResult) {
+      resolve(restorativeItem);
+    } else {
+      reject();
+    }
+  });
+};
+
+// 回復薬を作る手順
+const createRestorative = (item) => {
+  const yakusou = item[0];
+  const aokinoko = item[1];
+  console.log(`${yakusou} + ${aokinoko} を調合して回復薬を作った！`);
+};
+
+// プロミスにクエストを依頼し、帰ってきた結果でやることが変わる。
+getRestorativeItem(true)
+  .then((item) => createRestorative(item))
+  .catch(() => console.error("クエストに失敗しました。"));
+```
+
+<br>
+このコードに絵を使って説明を加えます。
