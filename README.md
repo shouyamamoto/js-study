@@ -197,3 +197,16 @@ getRestorativeItem(true)
 <br>
 
 ![プロミスを図解](https://github.com/shouyamamoto/js-study/blob/images/image07.jpg)<br>
+<br>
+先ほど、`.then()`や`catch()`は Promise の処理結果によって実行される処理が変わるとお伝えしました。<br>
+モンハンコードを確認すると<br>
+
+```javascript
+getRestorativeItem(true)
+  .then((item) => createRestorative(item))
+  .catch(() => console.error("クエストに失敗しました。"));
+```
+
+`then()`の第一引数に与えた関数に`item`を渡しています。これはどこから渡ってきたのでしょうか？<br>
+答えは、Promise の中にある`resolve(restorativeItem)`から渡ってきています。<br>
+このように、`resolve()`は`.then()`と、`reject()`は`.catch()`とペアになっていることがわかります。<br>
