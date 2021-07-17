@@ -210,6 +210,5 @@ getRestorativeItem(true)
 `then()`の第一引数に与えた関数に`item`を渡しています。これはどこから渡ってきたのでしょうか？<br>
 答えは、Promise の中にある`resolve(restorativeItem)`から渡ってきています。<br>
 このように、`resolve()`は`.then()`と、`reject()`は`.catch()`とペアになっていることがわかります。<br>
-文字だけではわかりづらい方のために、fulfillment value
 
 ![プロミスを図解](https://github.com/shouyamamoto/js-study/blob/images/image08.jpg)<br>
