@@ -163,7 +163,7 @@ new Promise((resolve, reject) => {
   .catch(); // rejectが実行されたら実行される処理を書く
 ```
 
-まず、Promise を使うときには`new Promise`として、Promise から Promise のインスタンスを生成します。<br>
+まず、Promise を使うときには`new Promise`として、Promise から Promise オブジェクトを生成します。<br>
 続けて`.then()`や`.catch()`と書くことができます。これらは Promise の処理結果によって実行される処理が変わります。<br>
 <br>
 ここからは実際のコードと先ほどのモンハンの解説を混ぜて説明します。<br>
@@ -198,7 +198,7 @@ getRestorativeItem(true)
 
 ![プロミスを図解](https://github.com/shouyamamoto/js-study/blob/images/image07.jpg)<br>
 <br>
-先ほど、`.then()`や`catch()`は Promise の処理結果によって実行される処理が変わるとお伝えしました。<br>
+先ほど、`.then()`や`.catch()`は Promise の処理結果によって実行される処理が変わるとお伝えしました。<br>
 モンハンコードを確認すると<br>
 
 ```javascript
@@ -210,5 +210,10 @@ getRestorativeItem(true)
 `then()`の第一引数に与えた関数に`item`を渡しています。これはどこから渡ってきたのでしょうか？<br>
 答えは、Promise の中にある`resolve(restorativeItem)`から渡ってきています。<br>
 このように、`resolve()`は`.then()`と、`reject()`は`.catch()`とペアになっていることがわかります。<br>
+一連の流れを図解します。<br>
+<br>
 
 ![プロミスを図解](https://github.com/shouyamamoto/js-study/blob/images/image08.jpg)<br>
+<br>
+
+![プロミスを図解](https://github.com/shouyamamoto/js-study/blob/images/promise.gif)<br>
