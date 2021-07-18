@@ -192,7 +192,6 @@ getRestorativeItem(true)
   .catch(() => console.error("クエストに失敗しました。"));
 ```
 
-<br>
 先ほど、`.then()`や`.catch()`は Promise の処理結果によって実行される処理が変わるとお伝えしました。<br>
 モンハンコードを確認すると<br>
 
