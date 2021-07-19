@@ -211,3 +211,8 @@ getRestorativeItem(true)
 <br>
 
 ![プロミスを図解](https://github.com/shouyamamoto/js-study/blob/images/promise.gif)<br>
+
+### Promise チェーン
+
+ここまでで、基本的なプロミスの書き方についてはある理解できたかと思います。次は Promise チェーンを解説していきます。<br>
+まず Promise チェーンとは、Promise を使って非同期処理を順次実行していくことです。<br>
