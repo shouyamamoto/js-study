@@ -216,7 +216,7 @@ getRestorativeItem(true)
 ### Promise チェーン
 
 ここまでで、基本的なプロミスの書き方についてはある理解できたかと思います。次は Promise チェーンを解説していきます。<br>
-まず Promise チェーンとは、Promise を使って非同期処理を順次実行していくことです。<br>
+Promise チェーンとは、Promise を使って非同期処理を順次実行していくことです。<br>
 またモンハンで例えながら説明していきます。<br>
 
 ![新しいクエスト](https://github.com/shouyamamoto/js-study/blob/images/image09.jpg)<br>
