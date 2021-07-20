@@ -204,6 +204,7 @@ getRestorativeItem(true)
 `then()`の第一引数に与えた関数に`item`を渡しています。これはどこから渡ってきたのでしょうか？<br>
 答えは、Promise の中にある`resolve(restorativeItem)`から渡ってきています。<br>
 このように、`resolve()`は`.then()`と、`reject()`は`.catch()`とペアになっていることがわかります。<br>
+(厳密には違うかもしれないので、細かい挙動に関しては　[promises-book](https://azu.github.io/promises-book)などをご参照ください)<br>
 一連の流れを図解します。<br>
 <br>
 
@@ -216,3 +217,77 @@ getRestorativeItem(true)
 
 ここまでで、基本的なプロミスの書き方についてはある理解できたかと思います。次は Promise チェーンを解説していきます。<br>
 まず Promise チェーンとは、Promise を使って非同期処理を順次実行していくことです。<br>
+またモンハンで例えながら説明していきます。<br>
+
+![新しいクエスト](https://github.com/shouyamamoto/js-study/blob/images/image09.jpg)<br>
+<br>
+さきほどの回復薬から一つグレードアップした回復薬グレートが欲しい様子です。素材は「薬草」「アオキノコ」「ハチミツ」が必要です。<br>
+今回は「薬草」「アオキノコ」は密林のエリア 1 に、「ハチミツ」は密林のエリア 2 にあることを想定します。<br>
+なので、まずは密林についたら「薬草」「アオキノコ」を先に採取して、次に「ハチミツ」を採取することにします。
+では、コードを書いてみましょう。
+
+```javascript
+const pocket = [];
+const restorativeItem = ["薬草", "アオキノコ"]; // 例えば密林のエリア1にある
+const greatRestorativeItem = ["ハチミツ"]; // 例えば密林のエリア2にある
+
+const getRestorativeItem = (targetItem, questResult) => {
+  return new Promise((resolve, reject) => {
+    if (questResult) {
+      setTimeout(() => {
+        insertPocket(targetItem);
+        resolve(pocket);
+      }, 1000);
+    } else {
+      reject();
+    }
+  });
+};
+
+getRestorativeItem(restorativeItem, true)
+  .then((pocketItem) => {
+    return getRestorativeItem(greatRestorativeItem, true);
+  })
+  .then((pocketItem) => {
+    createRestorativeItem(pocketItem);
+  })
+  .catch(() => console.log("クエスト失敗..."))
+  .finally(() => console.log("クエスト終了"));
+
+const insertPocket = (items) => {
+  items.forEach((item) => {
+    pocket.push(item);
+  });
+};
+
+const createRestorativeItem = (pocketItem) => {
+  if (pocketItem.length === 3) {
+    const yakusou = pocketItem[0];
+    const aokinoko = pocketItem[1];
+    const hachimitu = pocketItem[2];
+    console.log(
+      `${yakusou}と${aokinoko}と${hachimitu}を調合して回復薬グレートを作った！！`
+    );
+  } else {
+    console.log(`素材が不足している...調合できずにクエスト失敗`);
+  }
+};
+```
+
+<br>
+
+まずはじめに`getRestorativeItem`を実行し、「薬草」「アオキノコ」を採取しにいきます。<br>
+その後に`.then()`と繋いで再度`getRestorativeItem`を実行して「ハチミツ」を採取しにいきます。`return`としている理由は、Promise チェーンを繋ぐ場合には then メソッドのコールバック関数の`return`に Promise のインスタンスを設定する必要があるからです。こうしないと Promise のチェーンが切れてしまい意図した挙動になりません。<br>
+例えば以下のように`return`を書かない場合には、2 回目の`getRestorativeItem`の処理を待たずに次の`createRestorativeItem`が実行されてしまい、`createRestorativeItem`での処理が失敗します。（ハチミツが不足している状態）
+
+```javascript
+getRestorativeItem(restorativeItem, true)
+  .then((pocketItem) => {
+    getRestorativeItem(greatRestorativeItem, true); // return がない場合
+  })
+  .then((pocketItem) => {
+    createRestorativeItem(pocketItem); // ハチミツが足りない状態で回復薬グレートを作り始めてしまう。　-> 素材が不足している...調合できずにクエスト失敗が出力される
+  })
+  .catch(() => console.log("クエスト失敗..."))
+  .finally(() => console.log("クエスト終了"));
+```
