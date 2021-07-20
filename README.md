@@ -285,6 +285,7 @@ const createRestorativeItem = (pocketItem) => {
 <br>
 `return`としている理由は、Promise チェーンを繋ぐ場合には then メソッドのコールバック関数の`return`に Promise のインスタンスを設定する必要があるからです。<br>
 こうしないと Promise のチェーンが切れてしまい意図した挙動になりません。<br>
+<br>
 例えば以下のように`return`を書かない場合には、2 回目の`getRestorativeItem`の処理を待たずに次の`createRestorativeItem`が実行されてしまい、`createRestorativeItem`での処理が失敗します。（ハチミツが不足している状態）
 
 ```javascript
@@ -297,4 +298,12 @@ getRestorativeItem(restorativeItem, true)
   })
   .catch(() => console.log("クエスト失敗..."))
   .finally(() => console.log("クエスト終了"));
+```
+
+```js
+return がない場合の出力結果;
+// ["薬草", "アオキノコ"]
+// 何かが足りないようだ...調合失敗
+// クエスト終了
+// ["ハチミツ"]
 ```
