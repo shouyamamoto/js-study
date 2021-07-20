@@ -204,7 +204,7 @@ getRestorativeItem(true)
 `then()`の第一引数に与えた関数に`item`を渡しています。これはどこから渡ってきたのでしょうか？<br>
 答えは、Promise の中にある`resolve(restorativeItem)`から渡ってきています。<br>
 このように、`resolve()`は`.then()`と、`reject()`は`.catch()`とペアになっていることがわかります。<br>
-(厳密には違うかもしれないので、細かい挙動に関しては　[promises-book](https://azu.github.io/promises-book)などをご参照ください)<br>
+(ここではわかりやすいようにペアと説明していますが、厳密には違います。細かい挙動に関しては　[promises-book](https://azu.github.io/promises-book)などをご参照ください)<br>
 一連の流れを図解します。<br>
 <br>
 
@@ -244,12 +244,12 @@ const getRestorativeItem = (targetItem, questResult) => {
   });
 };
 
-getRestorativeItem(restorativeItem, true)
+getRestorativeItem(restorativeItem, true) // getRestorativeItem(採取しにいく素材, 採取できたかどうか)
   .then((pocketItem) => {
-    return getRestorativeItem(greatRestorativeItem, true);
+    return getRestorativeItem(greatRestorativeItem, true); // getRestorativeItem(採取しにいく素材, 採取できたかどうか)
   })
   .then((pocketItem) => {
-    createRestorativeItem(pocketItem);
+    createRestorativeItem(pocketItem); // 調合する処理
   })
   .catch(() => console.log("クエスト失敗..."))
   .finally(() => console.log("クエスト終了"));
