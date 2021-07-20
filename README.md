@@ -277,7 +277,10 @@ const createRestorativeItem = (pocketItem) => {
 <br>
 
 まずはじめに`getRestorativeItem`を実行し、「薬草」「アオキノコ」を採取しにいきます。<br>
-その後に`.then()`と繋いで再度`getRestorativeItem`を実行して「ハチミツ」を採取しにいきます。`return`としている理由は、Promise チェーンを繋ぐ場合には then メソッドのコールバック関数の`return`に Promise のインスタンスを設定する必要があるからです。こうしないと Promise のチェーンが切れてしまい意図した挙動になりません。<br>
+その後に`.then()`と繋いで再度`getRestorativeItem`を実行して「ハチミツ」を採取しにいきます。<br>
+<br>
+`return`としている理由は、Promise チェーンを繋ぐ場合には then メソッドのコールバック関数の`return`に Promise のインスタンスを設定する必要があるからです。<br>
+こうしないと Promise のチェーンが切れてしまい意図した挙動になりません。<br>
 例えば以下のように`return`を書かない場合には、2 回目の`getRestorativeItem`の処理を待たずに次の`createRestorativeItem`が実行されてしまい、`createRestorativeItem`での処理が失敗します。（ハチミツが不足している状態）
 
 ```javascript
