@@ -225,7 +225,7 @@ Promise チェーンとは、Promise を使って非同期処理を順次実行�
 今回は「薬草」「アオキノコ」は密林のエリア 1 に、「ハチミツ」は密林のエリア 2 にあることを想定します。<br>
 なので、まずは密林についたら「薬草」「アオキノコ」を先に採取して、次に「ハチミツ」を採取することにします。<br>
 
-![クエストの達成イメージ](https://github.com/shouyamamoto/js-study/blob/images/image09.jpg)<br>
+![クエストの達成イメージ](https://github.com/shouyamamoto/js-study/blob/images/image10.jpg)<br>
 <br>
 
 では、コードを書いてみましょう。
