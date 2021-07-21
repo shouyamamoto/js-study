@@ -150,6 +150,8 @@ Promise や async await を使うとネストが深くならず、可読性が�
 ![プロミスにクエストを頼む](https://github.com/shouyamamoto/js-study/blob/images/image05.jpg)<br>
 <br>
 こうしてハンターはうまく時間を使えるようになりました。<br>
+ここで重要なのは、`プロミス（アイルー）がクエストに向かっているときにもハンターの行動が制限されることがない`というところです。<br>
+JavaScript に話を戻すと、重い処理を実行していてもクリックやスクロールができるので、ユーザ体験がよくなるということです。
 
 ### コードとモンハンを混ぜて解説
 
@@ -192,8 +194,31 @@ getRestorativeItem(true)
   .catch(() => console.error("クエストに失敗しました。"));
 ```
 
-先ほど、`.then()`や`.catch()`は Promise の処理結果によって実行される処理が変わるとお伝えしました。<br>
-モンハンコードを確認すると<br>
+まず、1 行目
+
+```js
+const restorativeItem = ["薬草", "アオキノコ"];
+```
+
+は、回復薬を作るために必要なアイテムを配列に格納しています。<br>
+
+```js
+const getRestorativeItem = (questResult) => {
+  return new Promise((resolve, reject) => {
+    if (questResult) {
+      resolve(restorativeItem);
+    } else {
+      reject();
+    }
+  });
+};
+```
+
+次に`new Promise()`としてプロミスを呼び出しています。これからこのプロミスに何をして欲しいかを指示します。（プロミス（アイルー）を呼んでハンターが何をして欲しいかのメモを渡すイメージ）<br>
+ここでは`questResult`の結果によって、`resolve`か`reject`を実行するように伝えています。<br>
+そして、`resolve`を実行したときには、`restorativeItem`を渡すようにしました。<br>
+<br>
+次に進みます。
 
 ```javascript
 getRestorativeItem(true)
@@ -201,7 +226,9 @@ getRestorativeItem(true)
   .catch(() => console.error("クエストに失敗しました。"));
 ```
 
-`then()`の第一引数に与えた関数に`item`を渡しています。これはどこから渡ってきたのでしょうか？<br>
+先ほど、`.then()`や`.catch()`は Promise の処理結果によって実行される処理が変わるとお伝えしました。<br>
+`then()`の第一引数に与えた関数に`item`が渡ってきます。これはどこから渡ってくるのでしょうか？<br>
+<br>
 答えは、Promise の中にある`resolve(restorativeItem)`から渡ってきています。<br>
 このように、`resolve()`は`.then()`と、`reject()`は`.catch()`とペアになっていることがわかります。<br>
 (ここではわかりやすいようにペアと説明していますが、厳密には違います。細かい挙動に関しては　[promises-book](https://azu.github.io/promises-book)などをご参照ください)<br>
@@ -234,7 +261,6 @@ Promise チェーンとは、Promise を使って非同期処理を順次実行�
 const pocket = [];
 const restorativeItem = ["薬草", "アオキノコ"]; // 例えば密林のエリア1にある
 const greatRestorativeItem = ["ハチミツ"]; // 例えば密林のエリア2にある
-
 const getRestorativeItem = (targetItem, questResult) => {
   return new Promise((resolve, reject) => {
     if (questResult) {
