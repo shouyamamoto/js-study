@@ -268,7 +268,7 @@ const getRestorativeItem = (targetItem, questResult) => {
       setTimeout(() => {
         insertPocket(targetItem);
         resolve(pocket);
-      }, 1000);
+      }, 2000);
     } else {
       reject();
     }
@@ -334,3 +334,86 @@ return がない場合の出力結果;
 // クエスト終了
 // ["ハチミツ"]
 ```
+
+`.then()`や`.catch()`を順次実行する際には、「`thenメソッドのコールバック関数のreturnにはPromiseのインスタンスを設定する`」ことを覚えておきましょう。<br>
+<br>
+
+### Promise を並列処理する方法
+
+Promise は並列処理を行うこともできます。並列処理を行うためには`Promise.all`を使います。（他にも`Promise.race`や`Promise.allSettled`などありますが、説明は割愛します。）
+では先ほどのコードを`Promise.all`を用いて書き直してみます。
+
+```js
+const pocket = [];
+const restorativeItem = ["薬草", "アオキノコ"]; // 例えば密林のエリア1にある
+const greatRestorativeItem = ["ハチミツ"]; // 例えば密林のエリア2にある
+
+const getRestorativeItem = (targetItem, questResult) => {
+  return new Promise((resolve, reject) => {
+    if (questResult) {
+      setTimeout(() => {
+        insertPocket(targetItem);
+        resolve(pocket);
+      }, 2000);
+    } else {
+      reject();
+    }
+  });
+};
+
+const insertPocket = (items) => {
+  items.forEach((item) => {
+    pocket.push(item);
+  });
+};
+
+const createRestorativeItem = (pocketItem) => {
+  if (pocketItem.length === 3) {
+    const yakusou = pocketItem[0];
+    const aokinoko = pocketItem[1];
+    const hachimitu = pocketItem[2];
+    console.log(
+      `${yakusou}と${aokinoko}と${hachimitu}を調合して回復薬グレートを作った！！`
+    );
+  } else {
+    console.log(`素材が不足している...調合できずにクエスト失敗`);
+  }
+};
+
+Promise.all([
+  getRestorativeItem(restorativeItem, true),
+  getRestorativeItem(greatRestorativeItem, true),
+])
+  .then(() => {
+    createRestorativeItem(pocket);
+  })
+  .catch(() => {
+    console.log("クエスト失敗...");
+  })
+  .finally(() => {
+    console.log("クエスト終了");
+  });
+```
+
+`Promise.all`の中に反復可能オブジェクトを設定し、その中で Promise のインスタンスを格納します。<br>
+今回は
+
+```js
+Promise.all([
+  getRestorativeItem(restorativeItem, true),
+  getRestorativeItem(greatRestorativeItem, true),
+]);
+```
+
+今回は反復可能オブジェクトとして配列を使用し、配列に Promise のインスタンスを返す`getRestorativeItem`を 2 つ格納しています。<br>
+`Promise.all`を使うと、反復可能オブジェクトに格納した Promise のインスタンスの状態が全て`fulfilled`になるまで次の`.then()`が実行されません。<br>
+Promise のインスタンスの状態が`fulfilled`になるということは、全ての処理で`resolve()`が実行されるまでという意味という考え方もできます。<br>
+<br>
+
+この`Promise.all()`を使うことで Promise オブジェクトの配列を並列に実行することができるため、同じ処理を直列で行うよりも処理が早くなります。<br>
+
+- https://azu.github.io/promises-book/#ch2-promise-all
+
+例えば、先ほどであれば直列に`.then`を実行していたので、2 秒、2 秒で合計 4 秒かかっていましたが、<br>
+`Promise.all`を使うことで 2 秒で処理を終わらせることができます。<br>
+<br>
