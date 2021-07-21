@@ -396,7 +396,6 @@ Promise.all([
 ```
 
 `Promise.all`の中に反復可能オブジェクトを設定し、その中で Promise のインスタンスを格納します。<br>
-今回は
 
 ```js
 Promise.all([
