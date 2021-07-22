@@ -1,7 +1,5 @@
 # もりけん塾勉強会資料
 
-モンハンで理解する非同期処理の書き方<br>
-
 ![モンハンで理解する非同期処理の書き方](https://github.com/shouyamamoto/js-study/blob/images/fv.png)<br>
 <br>
 
