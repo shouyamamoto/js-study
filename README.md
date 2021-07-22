@@ -455,26 +455,26 @@ Promise のインスタンスの状態が`fulfilled`になるということは�
 ここまでの内容が理解できれば、ある程度 Promise を自分で書くことができるようになっていると思います。<br>
 もっと非同期処理について知りたい!という方のために、次は何を学ぶべきかを残しておきます。<br>
 
-- [【JS】ガチで学びたい人のための JavaScript メカニズム(Udemy)](https://www.udemy.com/course/javascript-essence/)
+- [【JS】ガチで学びたい人のための JavaScript メカニズム(Udemy)](https://www.udemy.com/course/javascript-essence/)<br>
   今回の資料を作成する際にとても参考にさせていただきました。非同期処理だけでなく、JS の基本的な知識から深い部分まで丁寧に解説されているので、これから JS を学習される方にもおすすめの動画教材です。
 
-- [Promise-book](https://azu.github.io/promises-book)
+- [Promise-book](https://azu.github.io/promises-book)<br>
   Promise についてまとまっています。Promise を知りつくしたい！という方にはこちらをおすすめします。
 
-- async await について学ぶ
+- async await について学ぶ<br>
   Promise を使うよりも非同期処理をわかりやすく記述できる方法です。こちらも[Promise-book](https://azu.github.io/promises-book)や[【JS】ガチで学びたい人のための JavaScript メカニズム(Udemy)](https://www.udemy.com/course/javascript-essence/)をおすすめしておきます。
 
-- イベントループ、タスクキュー（マイクロタスク、ミクロタスクについて）
+- イベントループ、タスクキュー（マイクロタスク、ミクロタスクについて）<br>
   [【JS】ガチで学びたい人のための JavaScript メカニズム(Udemy)](https://www.udemy.com/course/javascript-essence/)
   こちらも紹介した Udemy の教材がとてもわかりやすかったです。
 
-- [JavaScript の非同期処理をできる限り正確に理解する](https://qiita.com/UTDoi/items/d49ea919818d9b519f93)
+- [JavaScript の非同期処理をできる限り正確に理解する](https://qiita.com/UTDoi/items/d49ea919818d9b519f93)<br>
   こちらは Qiita の記事ですが、非同期 API である Promise が裏側でどのように動いているかを丁寧に解説されている記事です。<br>
   今回の資料を作成するにあたって、僕自身もわかっていなかったのですが、<br>
   JS はシングルスレッドなのに、なぜ非同期処理を行うと処理が同時に実行できるんだ？Promise の並列処理はどうやって動いているんだ？<br>
   という疑問が解決する記事です。<br>
 
-- fetch を使ってみる
+- fetch を使ってみる<br>
   Promise や async await の書き方がわかったら、実際に外部から値を取得してみる練習をすると良いです。<br>
   fetch は Promise の理解をしていればそう難しくはないと思います。
 
